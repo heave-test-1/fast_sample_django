@@ -1,0 +1,13 @@
+POST http://gofast.getcohesive.io:57209/polls/add_question
+Content-Type: application/json
+
+{
+  "question_text": "Is Bojack more horse or man?"
+}
+
+###
+GET http://gofast.getcohesive.io:56896/polls
+Accept: application/json
+
+###
+
