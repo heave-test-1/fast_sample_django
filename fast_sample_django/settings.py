@@ -79,10 +79,10 @@ DATABASES = {
     'default': {
        'ENGINE': 'django.db.backends.postgresql',
        'NAME': 'postgres',
-       'USER': os.getenv("database_username"),
-       'PASSWORD': os.getenv("database_password"),
-       'HOST': os.getenv("database_hostname"),
-       'PORT': os.getenv("database_port"),
+       'USER': os.getenv("DATABASE_USERNAME"),
+       'PASSWORD': os.getenv("DATABASE_PASSWORD"),
+       'HOST': os.getenv("DATABASE_HOSTNAME"),
+       'PORT': os.getenv("DATABASE_PORT"),
    }
 }
 
@@ -131,14 +131,14 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Redis
-REDIS_HOSTNAME = os.getenv("cache_hostname")
-REDIS_PORT = os.getenv("cache_port")
+REDIS_HOSTNAME = os.getenv("CACHE_HOSTNAME")
+REDIS_PORT = os.getenv("CACHE_PORT")
 REDIS_DB = 0
 
 # SQS
 AWS_REGION = 'ap-southeast-1'
-SQS_URL = os.getenv("message_queue_url")
+SQS_URL = os.getenv("MESSAGE_QUEUE_URL")
 
 # S3
-S3_BUCKET = os.getenv("photos_bucket")
-S3_KEY = os.getenv("photos_key")
+S3_BUCKET = os.getenv("PHOTOS_BUCKET")
+S3_KEY = os.getenv("PHOTOS_KEY")
