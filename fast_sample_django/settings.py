@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure--+oj47w5p9amwgjw2n67g5qd(u9w1p!il^jp46dw9xcgv6i@tm'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = exec(os.getenv("DEBUG", "False"))
+DEBUG = os.getenv("DEBUG", "False") == 'True'
 
 ALLOWED_HOSTS = ["*"]
 
@@ -79,10 +79,10 @@ DATABASES = {
     'default': {
        'ENGINE': 'django.db.backends.postgresql',
        'NAME': 'postgres',
-       'USER': os.getenv("DATABASE_USERNAME"),
-       'PASSWORD': os.getenv("DATABASE_PASSWORD"),
-       'HOST': os.getenv("DATABASE_HOSTNAME"),
-       'PORT': os.getenv("DATABASE_PORT"),
+       'USER': os.getenv("POSTGRES_USER"),
+       'PASSWORD': os.getenv("POSTGRES_PASSWORD"),
+       'HOST': os.getenv("POSTGRES_HOST"),
+       'PORT': os.getenv("POSTGRES_PORT"),
    }
 }
 
@@ -123,12 +123,28 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Logging
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'DEBUG',
+    },
+}
 
 # Redis
 REDIS_HOSTNAME = os.getenv("CACHE_HOSTNAME")
@@ -142,3 +158,6 @@ SQS_URL = os.getenv("MESSAGE_QUEUE_URL")
 # S3
 S3_BUCKET = os.getenv("PHOTOS_BUCKET")
 S3_KEY = os.getenv("PHOTOS_KEY")
+
+# DyanmoDB
+CHATS_TABLE = os.getenv("CHATS_TABLE")

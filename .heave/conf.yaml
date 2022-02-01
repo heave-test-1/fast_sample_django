@@ -1,0 +1,76 @@
+name: api-server
+metadata:
+    language: python
+    framework: django
+dockerfile:
+type: http
+build:
+    baseImage: python:3.9
+    osPackageInstallCommand: ""
+    applicationDependencyPath: requirements.txt
+    applicationPackageInstallCommand: pip install -r requirements.txt
+    applicationBuildCommand: python manage.py collectstatic
+    applicationRunCommand: python manage.py migrate && python manage.py runserver 0.0.0.0:8080
+env:
+    - name: PYTHONUNBUFFERED
+      value: "1"
+    - name: DEBUG
+      value: "True"
+    - name: POSTGRES_HOST
+      value: '{{DATABASE_HOSTNAME}}'
+      derived: true
+    - name: POSTGRES_PORT
+      value: '{{DATABASE_PORT}}'
+      derived: true
+    - name: POSTGRES_USER
+      value: '{{DATABASE_USERNAME}}'
+      derived: true
+    - name: POSTGRES_PASSWORD
+      value: '{{DATABASE_PASSWORD}}'
+      derived: true
+ports:
+    - 8080
+run:
+    replicas: 1
+    cpu: 200m
+    memory: 400Mi
+canBePublic: true
+extraApplications:
+    - name: async-worker
+      metadata:
+        language: go
+        framework: gin
+      dockerfile: ""
+      type: http
+      build:
+        baseImage: python:3.9
+        osPackageInstallCommand: ""
+        applicationDependencyPath: requirements.txt
+        applicationPackageInstallCommand: pip install -r requirements.txt
+        applicationBuildCommand: ""
+        applicationRunCommand: python manage.py migrate && python manage.py runserver 0.0.0.0:8080
+      env:
+        - name: PYTHONUNBUFFERED
+          value: "1"
+          build_time: false
+          derived: false
+      ports:
+        - 8080
+      run:
+        replicas: 1
+        cpu: 200m
+        memory: 400Mi
+      canBePublic: false
+      inheritEnv: true
+resources:
+    - name: cache
+      type: redis
+    - name: database
+      type: postgres
+    - name: photos
+      type: s3
+    - name: mongo
+      type: mongo
+      init: s3://cohesive-customer/relevel/init-files/fast_sample_django/mongo/mongo
+
+      
