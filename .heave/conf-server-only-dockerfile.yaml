@@ -1,0 +1,43 @@
+name: api-server
+metadata:
+    language: python
+    framework: django
+dockerfile: Dockerfile
+build:
+    baseImage:
+    osPackageInstallCommand:
+    applicationDependencyPath:
+    applicationPackageInstallCommand:
+    applicationBuildCommand:
+    applicationRunCommand:
+type: http
+env:
+    - name: PYTHONUNBUFFERED
+      value: "1"
+    - name: DEBUG
+      value: "True"
+    - name: POSTGRES_HOST
+      value: '{{DATABASE_HOSTNAME}}'
+      derived: true
+    - name: POSTGRES_PORT
+      value: '{{DATABASE_PORT}}'
+      derived: true
+    - name: POSTGRES_USER
+      value: '{{DATABASE_USERNAME}}'
+      derived: true
+    - name: POSTGRES_PASSWORD
+      value: '{{DATABASE_PASSWORD}}'
+      derived: true
+ports:
+    - 8080
+run:
+    replicas: 1
+    cpu: 200m
+    memory: 400Mi
+canBePublic: true
+resources:
+    - name: cache
+      type: redis
+    - name: database
+      type: postgres
+      

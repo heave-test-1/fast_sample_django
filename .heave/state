@@ -1,12 +1,12 @@
 {
 	"environments": [
 		{
-			"name": "demo",
-			"key": "vaibhav-fast-sample-django-demo",
-			"is_public": true,
+			"name": "abc",
+			"key": "vaibhav-fast-sample-django-abc",
+			"is_public": false,
 			"conf": ""
 		}
 	],
-	"active_environment": "demo",
-	"last_change_at": "2022-02-01T13:44:25.899849+05:30"
+	"active_environment": "abc",
+	"last_change_at": "2022-02-09T21:55:45.304635+05:30"
 }
