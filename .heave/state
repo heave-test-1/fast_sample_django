@@ -5,8 +5,14 @@
 			"key": "vaibhav-fast-sample-django-abc",
 			"is_public": false,
 			"conf": ""
+		},
+		{
+			"name": "feature-z",
+			"key": "vaibhav-fast-sample-django-feature-z",
+			"is_public": true,
+			"conf": ""
 		}
 	],
-	"active_environment": "abc",
-	"last_change_at": "2022-02-09T21:55:45.304635+05:30"
+	"active_environment": "feature-z",
+	"last_change_at": "2022-02-16T19:55:55.563482+05:30"
 }

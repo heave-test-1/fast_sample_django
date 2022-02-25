@@ -72,5 +72,3 @@ resources:
     - name: mongo
       type: mongo
       init: s3://cohesive-customer/relevel/init-files/fast_sample_django/mongo/mongo
-
-      
