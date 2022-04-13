@@ -7,13 +7,13 @@ import redis
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
-from fast_sample_django.settings import REDIS_HOSTNAME, REDIS_PORT, REDIS_DB, SQS_URL, CHATS_TABLE
+from fast_sample_django.settings import REDIS_HOSTNAME, REDIS_PORT, REDIS_DB, SQS_URL, CHATS_TABLE, AWS_REGION
 from polls.models import Question
 
 
 r = redis.Redis(host=REDIS_HOSTNAME, port=REDIS_PORT, db=REDIS_DB)
-sqs = boto3.client('sqs', region_name='ap-southeast-1')
-dynamo = boto3.client('dynamodb', region_name='ap-southeast-1')
+sqs = boto3.client('sqs', region_name=AWS_REGION)
+dynamo = boto3.client('dynamodb', region_name=AWS_REGION)
 
 
 def index(request):
