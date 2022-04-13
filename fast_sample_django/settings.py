@@ -152,7 +152,7 @@ REDIS_PORT = os.getenv("CACHE_PORT")
 REDIS_DB = 0
 
 # SQS
-AWS_REGION = 'ap-southeast-1'
+AWS_REGION = os.getenv('AWS_REGION')
 SQS_URL = os.getenv("MESSAGE_QUEUE_URL")
 
 # S3
